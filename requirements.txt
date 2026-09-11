@@ -1,0 +1,36 @@
+# Core LangChain ecosystem
+langchain
+langchain-core
+langchain-community
+langchain-text-splitters
+
+# LLM providers
+langchain-openai
+openai
+
+# Local LLM support via Ollama (optional now, useful later)
+langchain-ollama
+
+# Embeddings and local Hugging Face models
+langchain-huggingface
+sentence-transformers
+torch
+transformers
+
+# Vector database
+chromadb
+
+# RAG document formats and Wikipedia content
+wikipedia
+pypdf
+docx2txt
+
+# Configuration, data validation, and notebooks
+python-dotenv
+pydantic
+jupyterlab
+ipykernel
+
+# Simple application interfaces; use later in the course
+streamlit
+gradio
