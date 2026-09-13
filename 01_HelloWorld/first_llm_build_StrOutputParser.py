@@ -1,9 +1,13 @@
 import os
-
 from pathlib import Path
+
+from IPython.terminal.shortcuts.auto_suggest import llm_autosuggestion
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq # langchain wrapper of groq
-from langchain_core.prompts import ChatPromptTemplate # https://reference.langchain.com/python/langchain-core
+from langchain_core.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate # https://reference.langchain.com/python/langchain-core
+from langchain_core.output_parsers import StrOutputParser #https://reference.langchain.com/python/langchain-core/output_parsers/string/StrOutputParser
+from transformers.models.llama4.processing_llama4 import chat_template
+
 
 def find_env_file(start_path: Path | None = None) -> Path | None:
     """Search upward from start_path for a .env file."""
@@ -35,30 +39,28 @@ os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
 os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGCHAIN_PROJECT") # organizing logs
 os.environ["LANGCHAIN_TRACING_V2"] = os.getenv("LANGCHAIN_TRACING_V2") # logging
 
-# https://reference.langchain.com/python/langchain-core/prompts/chat/ChatPromptTemplate
+# Build a chat template with system + user roles
+sys_msg = SystemMessagePromptTemplate.from_template("You are a helpful AI bot. Assume that you are female. Provide the answer based on the question. Answer should less than 100 word")
+user_msg = HumanMessagePromptTemplate.from_template("{question_text}")
 
-prompt = ChatPromptTemplate.from_messages(
-    [
-        ("system", "You are a helpful AI bot. Assume that your age is 100. Provide the answer based on the question in 10  words"),
-        ("user", "{input}")
-    ]
-)
-print(prompt)
+chat_template = ChatPromptTemplate.from_messages([sys_msg, user_msg])
 
+# Initialize Groq model
 llm = ChatGroq(
     model_name="openai/gpt-oss-120b",
-    temperature=0.5, # 1.5 near max creativity
+    temperature=0.0, # sampling parameter to adjust randomness
 )
 
-#response = llm.invoke("Explain what is maximum temperature value for ChatGroq llm models in 100 words")
-response = llm.invoke("How old are you?")
-print(response.content)
-#print(response.id)
+# Create a string parser and wire the pipeline
+text_only_parser = StrOutputParser()
+string_pipeline = chat_template | llm | text_only_parser
 
-chain = prompt | llm
+# Call the chain
+result = string_pipeline.invoke({"question_text": "Do you have a gender?"})
+print("RAW parser result:", result)
 
-response = chain.invoke({"input":"How old are you?"})
-print(response.content)
+
+
 
 
 

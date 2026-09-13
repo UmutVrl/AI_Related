@@ -1,9 +1,11 @@
 import os
-
 from pathlib import Path
+
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq # langchain wrapper of groq
-from langchain_core.prompts import ChatPromptTemplate # https://reference.langchain.com/python/langchain-core
+from langchain_core.prompts import PromptTemplate
+from langchain_core.output_parsers import JsonOutputParser
+
 
 def find_env_file(start_path: Path | None = None) -> Path | None:
     """Search upward from start_path for a .env file."""
@@ -27,38 +29,41 @@ else:
     # Fallback: let dotenv search default locations
     load_dotenv()
 
-#print(os.getenv("LANGCHAIN_PROJECT"))
-
 # to automatic retrieval later
 os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
 os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
 os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGCHAIN_PROJECT") # organizing logs
 os.environ["LANGCHAIN_TRACING_V2"] = os.getenv("LANGCHAIN_TRACING_V2") # logging
 
-# https://reference.langchain.com/python/langchain-core/prompts/chat/ChatPromptTemplate
+# Initialisation JSON parser
+json_parser = JsonOutputParser()
 
-prompt = ChatPromptTemplate.from_messages(
-    [
-        ("system", "You are a helpful AI bot. Assume that your age is 100. Provide the answer based on the question in 10  words"),
-        ("user", "{input}")
-    ]
+# Create Prompt Template
+query_template = PromptTemplate(
+    template="You are a helpful AI bot. Provide the answer in JSON format based on the question.\n"
+        "Answer should be less than 100 words total.\n"
+        "Output a JSON object with these keys:\n"
+        "- name: string – name of the tool\n"
+        "- description: string – short description of what it is used for\n"
+        "- main_features: array of strings – list of main features\n"
+        "{format_instructions}\n"
+        "Question: {user_query}\n",
+    input_variables=["user_query"],
+    partial_variables={"format_instructions": json_parser.get_format_instructions()}
 )
-print(prompt)
 
+# Initialize Groq model
 llm = ChatGroq(
     model_name="openai/gpt-oss-120b",
-    temperature=0.5, # 1.5 near max creativity
+    temperature=0.0, # sampling parameter to adjust randomness
 )
 
-#response = llm.invoke("Explain what is maximum temperature value for ChatGroq llm models in 100 words")
-response = llm.invoke("How old are you?")
-print(response.content)
-#print(response.id)
+# Build Chain
+chain = query_template | llm | json_parser
 
-chain = prompt | llm
-
-response = chain.invoke({"input":"How old are you?"})
-print(response.content)
+# Run Chain
+response = chain.invoke({"user_query": "Explain what is LangGraph used for?"})
+print(response)
 
 
 
