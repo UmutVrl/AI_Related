@@ -52,11 +52,11 @@ if groq_key:
         )
 
         candidate_models = [
-            "openai/gpt-oss-120b",
-            "llama-3.1-70b-versatile",
-            "llama-3.1-8b-instant",
-            "llama3-70b-8192",
-            "llama3-8b-8192",
+            "openai/gpt-oss-120b", # https://console.groq.com/playground
+            "llama-3.1-70b-versatile", # no longer supported by Groq
+            "llama-3.1-8b-instant", # no longer supported by Groq
+            "llama3-70b-8192", # no longer supported by Groq
+            "llama3-8b-8192", # no longer supported by Groq
         ]
 
         for model in candidate_models:
