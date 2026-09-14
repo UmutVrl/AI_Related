@@ -21,7 +21,8 @@ transformers
 chromadb
 
 # RAG document formats and Wikipedia content
-wikipedia
+arxiv
+wikipedia-api
 pypdf
 docx2txt
 
