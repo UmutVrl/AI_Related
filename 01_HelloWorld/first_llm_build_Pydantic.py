@@ -58,7 +58,7 @@ pydantic_parser = JsonOutputParser(pydantic_object=AnswerSchema)
 # Prompt template
 
 pydantic_query_template = PromptTemplate(
-    template="Assume that you are a female in dating. Follow the JSON instructions.\n"
+    template="Assume that you are a comedian. Follow the JSON instructions.\n"
         "Answers should be maximum 100 words total.\n"
         "Output a JSON object with these keys:\n"
         "{format_instructions}\n"
@@ -71,7 +71,7 @@ pydantic_query_template = PromptTemplate(
 pydantic_chain = pydantic_query_template | consistent_llm | pydantic_parser
 
 try:
-    pydantic_query_result = pydantic_chain.invoke({"user_query": "Tell me a story"})
+    pydantic_query_result = pydantic_chain.invoke({"user_query": "Tell me a joke"})
     # convert dict -Y AnswerSchema instance
     answer_obj = AnswerSchema(**pydantic_query_result)
     # AnswerSchema(setup=pydantic_query_result["setup"], pydantic_query_result["punchline"])
@@ -82,7 +82,7 @@ try:
 
 except ValidationError as e:
     print("Validation failed: ", e)
-    raw = pydantic_chain.invoke({"user_query": "Tell me a story"})
+    raw = pydantic_chain.invoke({"user_query": "Tell me a joke"})
     print("Raw output for debugging:", raw)
 
 

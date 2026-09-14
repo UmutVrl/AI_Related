@@ -40,7 +40,7 @@ os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGCHAIN_PROJECT") # organizing lo
 os.environ["LANGCHAIN_TRACING_V2"] = os.getenv("LANGCHAIN_TRACING_V2") # logging
 
 # Build a chat template with system + user roles
-sys_msg = SystemMessagePromptTemplate.from_template("You are a helpful AI bot. Assume that you are female. Provide the answer based on the question. Answer should less than 100 word")
+sys_msg = SystemMessagePromptTemplate.from_template("You are a helpful AI bot. Provide the answer based on the question. Answer should less than 100 word")
 user_msg = HumanMessagePromptTemplate.from_template("{question_text}")
 
 chat_template = ChatPromptTemplate.from_messages([sys_msg, user_msg])
@@ -56,7 +56,7 @@ text_only_parser = StrOutputParser()
 string_pipeline = chat_template | llm | text_only_parser
 
 # Call the chain
-result = string_pipeline.invoke({"question_text": "Do you have a gender?"})
+result = string_pipeline.invoke({"question_text": "What is RAG?"})
 print("RAW parser result:", result)
 
 

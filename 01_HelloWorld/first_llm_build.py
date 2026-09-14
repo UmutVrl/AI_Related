@@ -51,13 +51,13 @@ llm = ChatGroq(
 )
 
 #response = llm.invoke("Explain what is maximum temperature value for ChatGroq llm models in 100 words")
-response = llm.invoke("How old are you?")
+response = llm.invoke("What are you?")
 print(response.content)
 #print(response.id)
 
 chain = prompt | llm
 
-response = chain.invoke({"input":"How old are you?"})
+response = chain.invoke({"input":"What are you?"})
 print(response.content)
 
 
