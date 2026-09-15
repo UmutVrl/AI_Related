@@ -1,6 +1,0 @@
-id,name,department,email,joining_date,salary_eur,notes
-001,Ada Lovelace,Engineering,ada.lovelace@example.com,2024-01-15,72000,Works on analytics and automation.
-002,Alan Turing,Research,alan.turing@example.com,2023-06-01,78000,"Focus: machine learning, cryptography, and data quality."
-003,Grace Hopper,Platform,grace.hopper@example.com,2022-09-12,75000,Maintains Python services; on-call rotation every third week.
-004,Katherine Johnson,Data Science,katherine.johnson@example.com,2024-03-20,73500,Builds forecasting models and documentation.
-005,Edsger Dijkstra,Engineering,edsger.dijkstra@example.com,2021-11-05,81000,Prefers reproducible pipelines and clear algorithm design.
