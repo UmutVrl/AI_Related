@@ -36,7 +36,7 @@ os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGCHAIN_PROJECT")
 os.environ["LANGCHAIN_TRACING_V2"] = os.getenv("LANGCHAIN_TRACING_V2")
 
 #---text---
-documents =  TextLoader("sample.txt", encoding="utf-8").load()
+documents =  TextLoader("../03_Embedding/sample.txt", encoding="utf-8").load()
 #print(documents[0].page_content)
 print(documents[0].metadata)
 

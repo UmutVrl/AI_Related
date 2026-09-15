@@ -1,0 +1,11 @@
+Embeddings convert text into numerical vectors. These vectors allow a computer to compare the meaning of sentences, paragraphs, or document chunks.
+
+A vector embedding model does not assign one number to each word. Instead, it processes all tokens in context and creates one fixed-length representation for the complete input text.
+
+Semantic search uses embeddings to find passages with related meanings. A user may ask, "How can I repair a bike chain?" The system can retrieve a passage about cleaning, lubricating, and fixing a bicycle chain even when the exact words differ.
+
+Long documents should be divided into smaller chunks before embedding. Chunk overlap repeats a small amount of text between adjacent chunks so that important context is not lost at the boundary.
+
+For example, if one chunk ends with the words "vector databases store" and the next chunk starts with "store embeddings for retrieval," the repeated word "store" helps both chunks retain the connection.
+
+In a retrieval-augmented generation system, the application embeds every document chunk and saves the vectors. When a user asks a question, the application embeds the query, compares it with the stored vectors, and returns the most relevant chunks.

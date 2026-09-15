@@ -1,6 +1,5 @@
 import os
 import wikipediaapi
-
 from pathlib import Path
 from dotenv import load_dotenv
 from langchain_text_splitters import RecursiveCharacterTextSplitter, CharacterTextSplitter
