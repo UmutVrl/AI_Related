@@ -4,6 +4,7 @@ langchain-core
 langchain-community
 langchain-text-splitters
 
+
 # LLM providers
 langchain-openai
 openai
@@ -19,6 +20,9 @@ transformers
 
 # Vector database
 chromadb
+faiss-cpu
+pinecone
+langchain_pinecone
 
 # RAG document formats and Wikipedia content
 arxiv
@@ -35,3 +39,6 @@ ipykernel
 # Simple application interfaces; use later in the course
 streamlit
 gradio
+
+# Mathematical
+numpy
