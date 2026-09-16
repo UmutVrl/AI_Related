@@ -195,8 +195,6 @@ if pinecone_key:
         )
         print(results_simple)
 
-
-
     except Exception as e:
         print(f"❌ Pinecone run failed: {e}")
 else:
