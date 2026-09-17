@@ -31,7 +31,7 @@ else:
     load_dotenv()
 
 #---text---
-documents =  TextLoader("../03_Embedding/sample.txt", encoding="utf-8").load()
+documents =  TextLoader("../99_AuxiliarySource/sample.txt", encoding="utf-8").load()
 #print(documents[0].page_content)
 print(documents[0].metadata)
 

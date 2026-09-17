@@ -50,7 +50,7 @@ v = np.array(query_text)
 #print(len(v))
 #print(np.linalg.norm(v))
 
-with open("sample.txt", "r", encoding="utf-8") as fh:
+with open("../99_AuxiliarySource/sample.txt", "r", encoding="utf-8") as fh:
     sample_text = fh.read()
 
 splitter_text = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=20)
