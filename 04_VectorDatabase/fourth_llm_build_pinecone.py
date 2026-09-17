@@ -30,13 +30,6 @@ if env_path:
 else:
     load_dotenv()
 
-os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
-os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
-os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGCHAIN_PROJECT")
-os.environ["LANGCHAIN_TRACING_V2"] = os.getenv("LANGCHAIN_TRACING_V2")
-os.environ["PINECONE_API_KEY"] = os.getenv("PINECONE_API_KEY")
-os.environ["PINECONE_ENVIRONMENT"] = os.getenv("PINECONE_ENVIRONMENT")
-
 pinecone_key = os.environ["PINECONE_API_KEY"]
 if pinecone_key:
     try:
@@ -185,7 +178,6 @@ if pinecone_key:
 
         # Use stable vector IDs based on doc_uuid
         ids = [doc.metadata["doc_uuid"] for doc in docs]
-
         vector_store.add_documents(documents=docs, ids=ids)
 
         # --- Similarity Search ---

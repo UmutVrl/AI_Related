@@ -29,12 +29,6 @@ else:
 
 #print(os.getenv("LANGCHAIN_PROJECT"))
 
-# to automatic retrieval later
-os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
-os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
-os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGCHAIN_PROJECT") # organizing logs
-os.environ["LANGCHAIN_TRACING_V2"] = os.getenv("LANGCHAIN_TRACING_V2") # logging
-
 # https://reference.langchain.com/python/langchain-core/prompts/chat/ChatPromptTemplate
 
 prompt = ChatPromptTemplate.from_messages(

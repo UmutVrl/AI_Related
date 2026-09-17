@@ -29,11 +29,6 @@ if env_path:
 else:
     load_dotenv()
 
-os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
-os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
-os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGCHAIN_PROJECT")
-os.environ["LANGCHAIN_TRACING_V2"] = os.getenv("LANGCHAIN_TRACING_V2")
-
 #---HF Embeddings---
 # https://docs.langchain.com/oss/python/integrations/embeddings
 hf_embedder = HuggingFaceEmbeddings(
@@ -72,7 +67,7 @@ doc_result = hf_embedder.embed_documents(doc_texts)
 
 #---pdf---
 
-pdf_documents = PyMuPDF4LLMLoader("Schitzer+24_ACM_SocialRobotCompanion.pdf").load()
+pdf_documents = PyMuPDF4LLMLoader("../99_AuxiliarySource/Schitzer+24_ACM_SocialRobotCompanion.pdf").load()
 #print(pdf_documents[0].metadata)
 
 char_splitter = RecursiveCharacterTextSplitter(

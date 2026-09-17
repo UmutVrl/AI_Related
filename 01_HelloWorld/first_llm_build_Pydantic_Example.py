@@ -32,12 +32,6 @@ else:
     # Fallback: let dotenv search default locations
     load_dotenv()
 
-# to automatic retrieval later
-os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
-os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
-os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGCHAIN_PROJECT") # organizing logs
-os.environ["LANGCHAIN_TRACING_V2"] = os.getenv("LANGCHAIN_TRACING_V2") # logging
-
 creative_llm = ChatGroq(
     model_name="openai/gpt-oss-120b",
     temperature=1.8, # sampling parameter to adjust randomness

@@ -33,12 +33,6 @@ else:
 
 #print(os.getenv("LANGCHAIN_PROJECT"))
 
-# to automatic retrieval later
-os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
-os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
-os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGCHAIN_PROJECT") # organizing logs
-os.environ["LANGCHAIN_TRACING_V2"] = os.getenv("LANGCHAIN_TRACING_V2") # logging
-
 # Build a chat template with system + user roles
 sys_msg = SystemMessagePromptTemplate.from_template("You are a helpful AI bot. Provide the answer based on the question. Answer should less than 100 word")
 user_msg = HumanMessagePromptTemplate.from_template("{question_text}")
